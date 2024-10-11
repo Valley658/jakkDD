@@ -1,0 +1,175 @@
+@import url('https://fonts.googleapis.com/css2?family=VT323&display=swap');
+
+body {
+    font-family: 'VT323', monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    height: 100vh;
+    background-color: #0f0f0f;
+    color: #33ff33;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.dark-mode {
+    background-color: #0f0f0f;
+    color: #33ff33;
+}
+
+.light-mode {
+    background-color: #fff;
+    color: #000;
+}
+
+.side-panel {
+    width: 250px;
+    background-color: #222;
+    padding: 20px;
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.side-panel h2 {
+    font-size: 1.5em;
+    color: #33ff33;
+}
+
+.side-panel ul {
+    list-style: none;
+    padding: 0;
+}
+
+.side-panel ul li {
+    margin-bottom: 15px;
+}
+
+.panel-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 1.2em;
+    color: #33ff33;
+    background-color: transparent;
+    border: 2px solid #33ff33;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.panel-btn:hover {
+    background-color: #33ff33;
+    color: #222;
+}
+
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+h1.glitch {
+    font-size: 3em;
+    text-transform: uppercase;
+    position: relative;
+    animation: glitch 1.5s infinite;
+    background: linear-gradient(to right, red, orange, yellow, green, cyan, blue, violet);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.hack-btn {
+    background-color: #222;
+    color: #33ff33;
+    border: 2px solid #33ff33;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.token-display {
+    font-size: 1.5em;
+    margin-top: 20px;
+    animation: flicker 1s infinite alternate;
+}
+
+.theme-toggle {
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+    margin: 0 10px;
+}
+
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+}
+
+.slider.round {
+    border-radius: 24px;
+}
+
+.slider.round:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 2px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Glitch effect */
+@keyframes glitch {
+    0% { clip: rect(44px, 9999px, 56px, 0); }
+    20% { clip: rect(92px, 9999px, 20px, 0); }
+    40% { clip: rect(44px, 9999px, 56px, 0); }
+    60% { clip: rect(92px, 9999px, 20px, 0); }
+    80% { clip: rect(44px, 9999px, 56px, 0); }
+    100% { clip: rect(92px, 9999px, 20px, 0); }
+}
+
+@keyframes flicker {
+    0% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+    100% {
+        opacity: 1;
+    }
+}
