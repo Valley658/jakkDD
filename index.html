@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>최저가 계정 판매점</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+            background-color: #1e2124;
+            color: #ffffff;
+            overflow: hidden;
+        }
+        .left-panel {
+            width: 120px;
+            background-color: #2f3136;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 10px;
+            position: relative;
+            justify-content: space-between;
+        }
+        .left-panel .icon {
+            width: 48px;
+            height: 48px;
+            background-color: #7289da; /* 파란색 아이콘 */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 10px 0;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: background-color 0.2s ease-in-out;
+        }
+        .left-panel .icon:hover {
+            background-color: #5b6eae;
+        }
+        .title {
+            color: #ffffff;
+            font-weight: bold;
+            margin: 10px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+        .menu-item {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            font-size: 14px;
+            color: #b9bbbe;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            padding-left: 10px;
+        }
+        .menu-item:hover {
+            background-color: #36393f;
+            color: #ffffff;
+        }
+        .menu-item i {
+            margin-right: 8px;
+        }
+        .login-button {
+            width: 80%;
+            padding: 10px 0;
+            text-align: center;
+            background-color: #36393f;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s ease-in-out;
+            margin-bottom: 10px;
+        }
+        .login-button:hover {
+            background-color: #4a4d52;
+        }
+        .main-content {
+            flex: 1;
+            background-color: #2c2f33;
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+            overflow-y: auto;
+        }
+        .content-title {
+            font-size: 65px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .content-description {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="left-panel">
+        <div>
+            <div class="icon" onclick="showHome()"><i class="fab fa-discord"></i></div>
+            <div class="title">최저가 계정 판매점</div>
+            <div class="menu-item" onclick="showContent('안녕하세요! 최저가 계정 판매점에 오신것을 환영합니다', '이 부분에 설명을 쓰시오')"><i class="fas fa-hand-paper"></i> 환영합니다</div>
+            <div class="menu-item" onclick="showContent('사용법 & 문서', '사용법 및 문서에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-book"></i> 사용법&문서</div>
+            <div class="menu-item" onclick="showContent('게시판', '게시판에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-clipboard"></i> 게시판</div>
+            <div class="menu-item" onclick="showContent('서버 검색', '서버를 검색하는 방법에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-search"></i> 서버 검색</div>
+            <div class="menu-item" onclick="showContent('서버 이벤트', '서버 이벤트에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-calendar-alt"></i> 서버 이벤트</div>
+            <div class="menu-item" onclick="showContent('구인구직', '구인구직에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-briefcase"></i> 구인구직</div>
+            <div class="menu-item" onclick="showContent('봇 목록', '봇 목록에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-robot"></i> 봇 목록</div>
+            <div class="menu-item" onclick="showContent('활동 목록', '활동 목록에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-list"></i> 활동 목록</div>
+            <div class="menu-item" onclick="showContent('서버 순위', '서버 순위에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-chart-line"></i> 서버 순위</div>
+            <!-- 게임하러가기 버튼 추가 -->
+            <div class="menu-item" onclick="window.open('https://valley658.shop/game.html', '_blank')"><i class="fas fa-gamepad"></i> 게임하러가기</div>
+        </div>
+        <button id="login-button" class="login-button">
+            Discord 로그인
+        </button>
+    </div>
+    <div class="main-content" id="main-content">
+        <h2 class="content-title">메시지가 여기에 표시됩니다.</h2>
+        <p class="content-description"></p>
+    </div>
+
+    <script>
+        // Discord OAuth URL
+        const discordLoginUrl = "https://discord.com/oauth2/authorize?client_id=1295314159822573589&response_type=code&redirect_uri=https%3A%2F%2Fvalley658.shop%2Foauth%2Flogin_user&scope=identify+guilds+email+guilds.members.read+guilds.channels.read+guilds.join+dm_channels.read+dm_channels.messages.write+gdm.join";
+
+        document.getElementById("login-button").onclick = function () {
+            window.location.href = discordLoginUrl;
+        };
+
+        // Home 화면 표시 함수
+        function showHome() {
+            document.querySelector(".content-title").innerText = "메시지가 여기에 표시됩니다.";
+            document.querySelector(".content-description").innerText = "";
+        }
+
+        // 각 메뉴 항목 클릭 시 내용 표시 함수
+        function showContent(title, description) {
+            document.querySelector(".content-title").innerText = title;
+            document.querySelector(".content-description").innerText = description;
+        }
+
+        // Placeholder for user data
+        const userData = null; // User data should be fetched from the server or set dynamically after login
+
+        // Display user info if logged in
+        const userInfoContainer = document.getElementById('user-info-container');
+        if (userData) {
+            userInfoContainer.innerHTML = `
+                <div class="user-info">
+                    <img src="https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png" alt="프로필 사진">
+                    <span>${userData.username}</span>
+                    <i class="fas fa-sign-out-alt logout-icon" onclick="logout()"></i>
+                </div>
+            `;
+        }
+
+        function logout() {
+            fetch('/logout').then(() => location.reload());
+        }
+    </script>
+</body>
+</html>
