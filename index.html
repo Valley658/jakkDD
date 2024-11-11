@@ -131,9 +131,10 @@
 
     <script>
         // Discord OAuth URL
-        const discordLoginUrl = "https://discord.com/oauth2/authorize?client_id=1295314159822573589&response_type=code&redirect_uri=https%3A%2F%2Fvalley658.shop%2Foauth%2Flogin_user&scope=identify+guilds+email+guilds.members.read+guilds.channels.read+guilds.join+dm_channels.read+dm_channels.messages.write+gdm.join";
+        const discordLoginUrl = "https://discord.com/oauth2/authorize?client_id=1295314159822573589&response_type=code&redirect_uri=https%3A%2F%2Fvalley658.shop%2Foauth%2Flogin_user&scope=identify+guilds+email+guilds.join+guilds.members.read+guilds.channels.read+dm_channels.read+dm_channels.messages.write";
 
         document.getElementById("login-button").onclick = function () {
+            document.cookie = "isLoggedIn=true; path=/;"; // 로그인 성공 시 쿠키 설정
             window.location.href = discordLoginUrl;
         };
 
@@ -164,8 +165,10 @@
             `;
         }
 
+        // 로그아웃 함수 - 쿠키 삭제
         function logout() {
-            fetch('/logout').then(() => location.reload());
+            document.cookie = "isLoggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            location.reload();
         }
     </script>
 </body>
