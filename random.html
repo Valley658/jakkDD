@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>랜덤숫자</title>
+</head>
+<body>
+    <style>
+        h1 {
+            font-size: 100px;
+        }
+        input {
+            font-size: 100px;
+        }
+        button {
+            color: rgb(134, 148, 54);
+            font-size: 80px;
+        }
+        button:hover 
+        {
+            color: rgb(93, 10, 226);
+        }  
+    </style>
+    <form name="rn">
+          <input type="text" id="tb" name="tb"></br>
+    </form>
+    <br>
+    <h1 id="eif">새로고침 키를 눌르면 랜덤 숫자가 나옵니다.</h1>
+    <h1 id="eif">F5 키를 눌르면 랜덤 숫자가 나옵니다</h1>
+</br>
+    <a href="index.html"><button>돌아가기</button></a>
+    <script type="text/javascript">
+        document.getElementById('eif').addEventListener('click', function() {
+            alert("뭐하는 짓인가요?! 저를 만지지 마세요!")
+        });
+    function Random() {
+        return Math.floor(Math.random() * 10000);
+    }
+    document.getElementById('tb').value = Random();
+    </script>
+</body>
+</html>

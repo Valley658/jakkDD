@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>텍스트다운로더</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f0f0f0;
+    }
+    .container {
+      text-align: center;
+    }
+    input {
+      margin-bottom: 10px;
+      padding: 10px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: none;
+      background-color: #007BFF;
+      color: #fff;
+      cursor: pointer;
+    }
+    button:disabled {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <input id="inputField" type="text" placeholder="검색어를 입력하세요" oninput="handleInput(event)">
+    <p id="displayText"></p>
+    <button id="downloadBtn" disabled>다운로드</button>
+    <a href="index.html"><button>돌아가기</button></a>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
