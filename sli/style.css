@@ -1,0 +1,36 @@
+#slider {
+    width: 200px;
+    height: 20px;
+    background-color: #ccc;
+    position: relative;
+  }
+  
+  #knob {
+    width: 40px;
+    height: 40px;
+    background-color: #555;
+    border-radius: 50%;
+    position: absolute;
+    top: -10px;
+    left: 0;
+    cursor: pointer;
+    transition: left 0.3s ease;
+  }
+  
+  #message {
+    text-align: center;
+    font-size: 24px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  button {
+    font-display: none;
+    font-size: 90px;
+    color: chocolate;
+    outline-color: yellow;
+  }
+  
+  button:hover {
+    color: blue;
+  }

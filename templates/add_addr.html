@@ -1,0 +1,57 @@
+{% extends "base.html"%}
+{% block content %}
+<script language="javascript">
+    function CheckForm() {
+        form = document.form1;
+        if(form.name.value == "") {
+            alert("이름을 입력해 주세요");
+            form.name.focus();
+            return;
+        }
+        if(form.phone.value == "") {
+            alert("번호를 입력해 주세요");
+            form.phone.focus();
+            return;
+        }
+        if(form.addr.value == "") {
+            alert("주소를 입력해 주세요");
+            form.addr.focus();
+            return;
+        }
+        form.submit();
+    }
+</script>
+<p></p>
+<table cellpadding="5" width="100%">
+    <tr>
+        <td width="100%" align="center" valign="middle">
+        <div class="index">
+        <table bgcolor="black" cellspacing="1" cellpadding=5 border="1" width="500">
+            <form name="form1" method="post" action="{{ url_for('add_addr_proc')}}">
+            <tr>
+                <td bgcolor="white" width="100"><font size="2">이름</font></td>
+                <td bgcolor="white"><font size=2><input type="text" name="name" placeholder="이름을 입력해 주세요" size="40"></font></td>                
+            </tr>
+            <tr>
+                <td bgcolor="white"><font size="2">전화번호</font></td>
+                <td bgcolor="white"><font size=2><input type="text" name="phone" placeholder="전화번호을 입력해 주세요" size="40"></font></td>                
+            </tr>
+            <tr>
+                <td bgcolor="white"><font size="2">주소</font></td>
+                <td bgcolor="white"><font size=2><input type="text" name="addr" placeholder="주소를 입력해 주세요" size="40"></font></td>                
+            </tr>
+            <tr>
+                <td bgcolor="white" colspan="2"><font size=2>
+                    <input type="button" value="돌아가기" onclick="javascript:history.back()">
+                    <input type="button" value="전송" onclick="CheckForm()">
+                </font></td>
+            </tr>
+            </form>   
+        </table> 
+        </div>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}
+

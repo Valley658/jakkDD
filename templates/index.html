@@ -1,0 +1,115 @@
+{% extends "base.html"%}
+{% block content %}
+<style type="text/css">
+    .font-size {font-size : small}
+    .table_line{border-bottom:1px solid silver;}
+</style>
+<script language="javascript">
+function GetRidioValue() {
+    const radioList = document.getElementsByName('del');
+    var result = "";
+    radioList.forEach((node) => {
+        if(node.checked)  {
+            result = node.value;            
+        }
+    });
+
+    return result;    
+}
+
+function DelUser() {
+    var name = GetRidioValue();
+    
+    if(name == "" || name == "undefined" ) {
+        alert("삭제할 대상을 선택해 주세요");
+        return;
+    }
+
+    if(confirm("정말로 삭제 하시겠습니까?")) {
+        //document.getElementById('del_name').innerText = name;
+        document.list_form.del_name.value = name;
+        document.list_form.submit();
+    }
+}
+
+function CheckSearch() {
+    form = document.search_form;
+    if(form.name.value.length == 0) {
+        alert("검색할 이름을 입력해 주세요");
+        form.name.focus();
+        return
+    }
+    form.submit();
+}
+</script>
+<table cellpadding="5" width="100%">
+    <tr>        
+        <td width="100%" align="center" valign="middle">
+        <div class="index">
+        
+        <!-- url_for 함수는 괄호안에 route 되는 함수가 가지는 url주소를 가져온다 -->
+        <p></p>
+        <form name="search_form" method=post action="{{ url_for('search')}}">
+            <div>
+                <p> 
+                <font size="2">
+                    검색 :
+                    <input type="text" name='name' placeholder="이름을 입력해 주세요" >
+                    <input type="button" value="전송" onclick="CheckSearch()">
+                </font>
+                </p>            
+            </div>
+        </form>   
+        <p>&nbsp;</p>
+        <div class=".font-size2" >  
+        <table border="0">
+            <tr>
+                <td class=".font-size2">
+                    <font size="2">
+                    <a href="{{ url_for('add_addr') }}" class="navbar-brand"><img src="{{ url_for('static', filename='images/free-icon-user-add.png') }}" width=15> 연락처 추가</a>
+                    <a href="javascript:DelUser()" class="navbar-brand"><img src="{{ url_for('static', filename='images/free-icon-trash.png') }}" width=15> 연락처 삭제</a>
+                    </font>
+                    <p></p>
+                </td>
+            </tr>
+        </table>
+        
+        <table bgcolor="silver" cellspacing="1" cellpadding=5 width="50%"  class="font-size2">
+            <tr>
+                <td bgcolor=white class="table_line" colspan="4" align="right">
+                    <font size="2">
+                    <a href="{{ url_for('index') }}" class="navbar-brand"><img src="{{ url_for('static', filename='images/free-icon-list.png') }}" width=15> 전체목록</a>
+                    </font>
+                </td>
+            </tr>
+            <tr>
+                <td bgcolor=#f5f5f5 class="table_line" align="center" width="50"><font size=2>삭제</font></td>
+                <td bgcolor=#f5f5f5 class="table_line" align="center"><font size=2>이름</font></td>
+                <td bgcolor=#f5f5f5 class="table_line" align="center"><font size=2>전화번호</td>
+                <td bgcolor=#f5f5f5 class="table_line" align="center"><font size=2>주소</td>
+            </tr>
+            {% if datas | length == 0 %}
+                <tr>
+                    <td bgcolor="white"  height=500><font size=2>데이터가 존재하지 않습니다</font></td>
+                </tr>
+            {% else %}
+                <form name="list_form" method="post" action="{{ url_for('del_addr') }}">
+                {% for row in datas %}
+                    <tr>
+                        <td bgcolor="white" class="table_line"><input type="radio" name=del value="{{ row.name }}"></td>
+                        <td bgcolor="white" class="table_line"><font size=2>{{ row.name }}</td>
+                        <td bgcolor="white" class="table_line"><font size=2>{{ row.phone }}</font></td>
+                        <td bgcolor="white" class="table_line"><font size=2>{{ row.addr }}</font></td>
+                    </tr>
+                    
+                {% endfor %}
+                <input type="hidden" name="del_name" value="">
+                </form>
+            {% endif %}
+        </table> 
+        </div>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}
