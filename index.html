@@ -6,7 +6,7 @@
     <title>최저가 계정 판매점</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* General Styles */
+        /* 일반 스타일 */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -24,13 +24,12 @@
             flex-direction: column;
             align-items: center;
             padding-top: 10px;
-            position: relative;
             justify-content: space-between;
         }
         .left-panel .icon {
             width: 48px;
             height: 48px;
-            background-color: #7289da; /* 파란색 아이콘 */
+            background-color: #7289da;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -101,6 +100,27 @@
         .content-description {
             font-size: 18px;
         }
+        .game-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .game-buttons a button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #7289da;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .game-buttons a button:hover {
+            background-color: #5b6eae;
+        }
     </style>
 </head>
 <body>
@@ -117,8 +137,8 @@
             <div class="menu-item" onclick="showContent('봇 목록', '봇 목록에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-robot"></i> 봇 목록</div>
             <div class="menu-item" onclick="showContent('활동 목록', '활동 목록에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-list"></i> 활동 목록</div>
             <div class="menu-item" onclick="showContent('서버 순위', '서버 순위에 대한 설명을 여기에 작성하세요.')"><i class="fas fa-chart-line"></i> 서버 순위</div>
-            <!-- 게임하러가기 버튼 추가 -->
-            <div class="menu-item" onclick="window.open('https://valley658.shop/game.html', '_blank')"><i class="fas fa-gamepad"></i> 게임하러가기</div>
+            <!-- 게임 링크 버튼들 추가 -->
+            <div class="menu-item" onclick="showGameLinks()"><i class="fas fa-gamepad"></i> 게임하러가기</div>
         </div>
         <button id="login-button" class="login-button">
             Discord 로그인
@@ -130,29 +150,45 @@
     </div>
 
     <script>
-        // Discord OAuth URL
-        const discordLoginUrl = "https://discord.com/oauth2/authorize?client_id=1295314159822573589&response_type=code&redirect_uri=https%3A%2F%2Fvalley658.shop%2Foauth%2Flogin_user&scope=identify+guilds+email+guilds.join+guilds.members.read+dm_channels.messages.read+role_connections.write+messages.read+gdm.join+guilds.channels.read+dm_channels.read+dm_channels.messages.write";
+        const discordLoginUrl = "https://discord.com/oauth2/authorize?client_id=1295314159822573589&response_type=code&redirect_uri=https%3A%2F%2Fvalley658.shop%2Foauth%2Flogin_user&scope=identify+guilds+email+guilds.join+guilds.members.read+guilds.channels.read+dm_channels.read+dm_channels.messages.write";
 
         document.getElementById("login-button").onclick = function () {
+            document.cookie = "isLoggedIn=true; path=/;";
             window.location.href = discordLoginUrl;
         };
 
-        // Home 화면 표시 함수
         function showHome() {
             document.querySelector(".content-title").innerText = "메시지가 여기에 표시됩니다.";
             document.querySelector(".content-description").innerText = "";
         }
 
-        // 각 메뉴 항목 클릭 시 내용 표시 함수
         function showContent(title, description) {
             document.querySelector(".content-title").innerText = title;
             document.querySelector(".content-description").innerText = description;
         }
 
-        // Placeholder for user data
-        const userData = null; // User data should be fetched from the server or set dynamically after login
+        function showGameLinks() {
+            const contentDiv = document.getElementById('main-content');
+            contentDiv.innerHTML = `
+                <h2 class="content-title">게임 목록</h2>
+                <div class="game-buttons">
+                    <a href="https://valley658.shop/text.html" target="_blank"><button><i class="fas fa-file-download"></i> 텍스트 다운로드하러 가기</button></a>
+                    <a href="https://valley658.shop/mousepoint/mouse.html" target="_blank"><button><i class="fas fa-mouse-pointer"></i> 마우스포인터로 장난치러 가기</button></a>
+                    <a href="https://valley658.shop/sli/sli.html" target="_blank"><button><i class="fas fa-sliders-h"></i> 슬라이더 갖고 놀기</button></a>
+                    <a href="https://valley658.shop/random.html" target="_blank"><button><i class="fas fa-random"></i> 랜덤숫자를 가지고 놀기</button></a>
+                    <a href="https://valley658.shop/ak47/ak47.html" target="_blank"><button><i class="fas fa-crosshairs"></i> ak47 총소리듣기</button></a>
+                    <a href="https://www.addictinggames.com" target="_blank"><button><i class="fas fa-gamepad"></i> Addicting Games에서 즐기기</button></a>
+                    <a href="https://www.crazygames.com" target="_blank"><button><i class="fas fa-gamepad"></i> Crazy Games에서 즐기기</button></a>
+                    <a href="https://www.poki.com" target="_blank"><button><i class="fas fa-gamepad"></i> Poki에서 즐기기</button></a>
+                    <a href="https://www.miniclip.com" target="_blank"><button><i class="fas fa-gamepad"></i> Miniclip에서 즐기기</button></a>
+                    <a href="https://www.kongregate.com" target="_blank"><button><i class="fas fa-gamepad"></i> Kongregate에서 즐기기</button></a>
+                    <a href="https://valley658.shop/game.html" target="_blank"><button><i class="fas fa-gamepad"></i> 게임하러가기</button></a>
+                </div>
+            `;
+        }
 
-        // Display user info if logged in
+        const userData = null;
+
         const userInfoContainer = document.getElementById('user-info-container');
         if (userData) {
             userInfoContainer.innerHTML = `
@@ -165,7 +201,8 @@
         }
 
         function logout() {
-            fetch('/logout').then(() => location.reload());
+            document.cookie = "isLoggedIn=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+            location.reload();
         }
     </script>
 </body>
